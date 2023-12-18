@@ -1,3 +1,0 @@
-[submodule "course-frontend"]
-    path = path/to/submodule
-    url = https://github.com/username/course-frontend.git

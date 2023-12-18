@@ -1,0 +1,44 @@
+.course-list-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.course-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.course-item h2 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.course-item p {
+  margin: 5px 0;
+  line-height: 1.6;
+  color: #666;
+}
+
+.buttons {
+  margin-top: 10px;
+}
+
+.buttons button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  margin-right: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.buttons button:hover {
+  background-color: #0056b3;
+}
