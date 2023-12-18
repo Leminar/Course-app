@@ -162,7 +162,7 @@ app.post('/api/courses', async (req, res) => {
         res.status(201).json(result);
     } catch (err) {
         console.log(err);
-        res.status(500).send('Error saving to database');
+        res.status(500).send('Error saving to the database');
     }
 });
 
