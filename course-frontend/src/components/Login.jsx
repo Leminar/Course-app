@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Login = ({ setCurrentUser }) => { // Accept setCurrentUser as a prop
+const Login = ({ setCurrentUser }) => { 
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
       username: '',
@@ -35,8 +35,8 @@ const Login = ({ setCurrentUser }) => { // Accept setCurrentUser as a prop
           setError(data.message);
         } else {
           console.log('Login successful');
-          setCurrentUser(data.user); // Set the current user
-          navigate('/'); // Navigate to the homepage
+          setCurrentUser(data.user); 
+          navigate('/'); 
         }
 
       } catch (error) {

@@ -33,7 +33,6 @@ const CoursesList = () => {
         if (!response.ok) {
           throw new Error('Error deleting the course');
         }
-        // Remove the course from the state
         setCourses(courses.filter(course => course._id !== id));
       } catch (error) {
         console.error("Error:", error);
@@ -42,7 +41,6 @@ const CoursesList = () => {
   };
 
   const handleEdit = (id) => {
-    // Assuming you have a route like '/edit-course/:id'
     window.location.href = `/edit-course/${id}`;
   };
 

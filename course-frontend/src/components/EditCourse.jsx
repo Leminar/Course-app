@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Import useParams and useNavigate
+import { useParams, useNavigate } from 'react-router-dom'; 
 import './EditCourse.css';
 
 const EditCourse = () => {
@@ -52,7 +52,7 @@ const EditCourse = () => {
       if (!response.ok) {
         throw new Error('Error updating course');
       }
-      navigate('/courses'); // Use navigate to navigate to the courses page
+      navigate('/courses'); 
     } catch (error) {
       console.error('Error:', error);
     }

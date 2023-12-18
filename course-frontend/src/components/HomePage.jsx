@@ -6,7 +6,7 @@ const HomePage = ({ currentUser, setCurrentUser }) => {
   const handleLogout = () => {
     fetch('/api/logout', { method: 'POST' })
       .then(() => {
-        setCurrentUser(null); // User is logged out, reset the current user state
+        setCurrentUser(null); 
       })
       .catch(err => console.error('Logout failed:', err));
   };
@@ -40,7 +40,7 @@ const HomePage = ({ currentUser, setCurrentUser }) => {
           )}
         </ul>
       </nav>
-      {/* Additional content can be added here */}
+    
     </div>
   );
 };

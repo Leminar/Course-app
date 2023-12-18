@@ -38,7 +38,7 @@ const Register = () => {
         }
       } else {
         console.log('Registration successful, navigating to login');
-        navigate('/login'); // Ensure this matches the exact route path
+        navigate('/login'); 
         setFormData({ username : '', password: ''});
       }
     } catch (error) {

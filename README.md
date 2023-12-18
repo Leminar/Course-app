@@ -1,86 +1,125 @@
-# Course-App Documentation
+# API Documentation
 
-## Overview
-Course-App is a full-stack web application designed to manage educational courses. It allows users to register, login, view, create, edit, and delete course listings. This application is built using Node.js, Express for the backend, and React for the frontend.
+## User Authentication and Registration
 
-## Features
+### Register a User
 
-- **User Authentication**: Secure registration and login system.
-- **Course Management**: Users can view all courses, and logged-in users can add, edit, or delete courses they created.
-- **Responsive Design**: Frontend designed for various screen sizes.
+- **POST /api/register**
 
-## Installation and Setup
+Registers a new user.
 
-### Prerequisites
-- Node.js
-- MongoDB
-- npm (Node Package Manager)
+**Request Body:**
 
-### Setting up the Backend
+- `username` (string): User's username.
+- `password` (string): User's password.
 
-1. **Clone the repository**
+**Response:**
 
-  
-   git clone [https://github.com/Leminar/Course-app.git]
+- 302 Redirect to the login page on success.
+- 500 Internal Server Error on failure.
 
-   cd [courses-app]
-   
+### User Login
 
-2. **Install dependencies**
+- **POST /api/login**
 
-   Navigate to the backend directory and install the necessary packages.
+Authenticates a user and issues a JWT token.
 
+**Request Body:**
 
-   npm install
-  
+- `username` (string): User's username.
+- `password` (string): User's password.
 
-3. **Set up environment variables**
+**Response:**
 
-   Create a `.env` file in the root of the backend directory. Add the following environment variables:
+- 200 OK on successful login.
+- 401 Unauthorized on failed login.
+- JSON response with a JWT token on success.
 
-   
-   MONGO_URI=mongodb://127.0.0.1:27017/courses
-   SESSION_SECRET=2222
-   
+**Headers:**
 
-4. **Run the server**
+- `Authorization` (string): Bearer token with the JWT for protected routes.
 
-  
-   npm start
-   
+### User Logout
 
-   The server will start running on `http://localhost:5000`.
+- **POST /api/logout**
 
-### Setting up the Frontend
+Logs out the authenticated user.
 
-1. **Navigate to the frontend directory**
+**Response:**
 
-   
-   cd course-frontend
- 
+- 200 OK on successful logout.
+- 401 Unauthorized if not logged in.
 
-2. **Install dependencies**
+## Course Management
 
-   
-   npm install
- 
+### Get All Courses
 
-3. **Run the React app**
+- **GET /api/courses**
 
- 
-   npm start
-   
+Retrieves a list of all courses.
 
-   The application will open in your default web browser at `http://localhost:3000`.
+**Response:**
 
-## Usage
+- JSON array containing course objects on success.
+- 500 Internal Server Error on failure.
 
-- **Register/Log In**: To create, edit, or delete courses, a user must be registered and logged in.
-- **Viewing Courses**: Any visitor can view the list of courses available.
-- **Managing Courses**: Logged-in users can add new courses, edit, or delete their courses from the list.
+### Get a Course by ID
 
-## Technologies Used
+- **GET /api/courses/:id**
 
-- **Backend**: Node.js, Express, MongoDB, Mongoose, Passport.js, bcrypt.js
-- **Frontend**: React, HTML, CSS
+Retrieves a specific course by its ID.
 
+**Response:**
+
+- JSON object containing course details on success.
+- 404 Not Found if the course with the provided ID is not found.
+- 500 Internal Server Error on failure.
+
+### Create a Course
+
+- **POST /api/courses**
+
+Creates a new course.
+
+**Request Body:**
+
+- `name` (string): Course name.
+- `teacher` (string): Teacher's name.
+- `description` (string): Course description.
+- `semester` (string): Semester information.
+- `timing` (string): Course timing.
+- `classNumber` (string): Class number.
+- `isFull` (boolean): Indicates if the course is full.
+
+**Response:**
+
+- 201 Created on success, with the created course object.
+- 500 Internal Server Error on failure.
+
+### Update a Course by ID
+
+- **PUT /api/courses/:id**
+
+Updates a course by its ID.
+
+**Request Body:**
+
+Updated course details (same as course creation).
+
+**Response:**
+
+- 200 OK on success, with the updated course object.
+- 404 Not Found if the course with the provided ID is not found.
+- 500 Internal Server Error on failure.
+
+### Delete a Course by ID
+
+- **DELETE /api/courses/:id**
+
+Deletes a course by its ID.
+
+**Response:**
+
+- 200 OK on successful deletion.
+- 404 Not Found if the course with the provided ID is not found.
+- 500 Internal Server Error on failure.
