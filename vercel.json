@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      },
+      {
+        "src": "course-frontend/package.json",
+        "use": "@vercel/static-build",
+        "config": { "distDir": "course-frontend/build" }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "/api/$1"
+      },
+      {
+        "src": "/(.*)",
+        "dest": "course-frontend/build/$1"
+      }
+    ]
+  }
+  
