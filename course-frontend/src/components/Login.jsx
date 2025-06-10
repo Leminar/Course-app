@@ -1,57 +1,54 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './Login.css';
 
-const Login = ({ setCurrentUser }) => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  });
+const Login = ({ setCurrentUser }) => { 
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+      username: '',
+      password: '',
+    });
 
-  const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }; 
 
-  const handleLogin = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    const handleSubmit = async (event) => {
+      event.preventDefault();
 
-      const data = await response.json();
+      try {
+        const response = await fetch('http://localhost:5000/api/login', { 
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
 
-      if (!response.ok) {
-        setError(data.message);
-      } else {
-        const { token, user } = data;
-        
-        localStorage.setItem('token', token);
+        const data = await response.json();
+        if (!response.ok) {
+          setError(data.message);
+        } else {
+          console.log('Login successful');
+          setCurrentUser(data.user); 
+          navigate('/'); 
+        }
 
-        setCurrentUser(user);
-
-        navigate('/');
+      } catch (error) {
+        console.error('Error:', error);
+        setError('Error logging in');
       }
-    } catch (error) {
-      console.error('Error:', error);
-      setError('Error logging in');
-    }
-  };
+    };
 
   return (
     <div className="login-container">
       <h1>Login</h1>
-      <form className="login-form">
+      <form onSubmit={handleSubmit} className="login-form">
         <label htmlFor="username">Username:</label>
         <input
           type="text"
@@ -72,9 +69,7 @@ const Login = ({ setCurrentUser }) => {
           required
         />
 
-        <button type="button" onClick={handleLogin}>
-          Login
-        </button>
+        <button type="submit">Login</button>
 
         {error && <p className="error-message">{error}</p>}
       </form>
